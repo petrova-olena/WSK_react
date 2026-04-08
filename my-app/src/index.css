@@ -1,0 +1,41 @@
+html {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+thead {
+  background: #eec0c0;
+}
+
+th,
+td {
+  padding: 8px 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-collapse: collapse;
+  border-bottom: 1px solid;
+  text-align: left;
+}
+
+tr {
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-collapse: collapse;
+}
+
+img {
+  width: 80px;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
