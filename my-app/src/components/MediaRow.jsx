@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 
-const MediaRow = (props) => {
-  const {item} = props;
+const MediaRow = ({item, onClick}) => {
   return (
-    <tr>
+    <tr onClick={onClick} style={{cursor: 'pointer'}}>
       <td>
         <img src={item.thumbnail} alt={item.title} />
       </td>
@@ -12,6 +11,9 @@ const MediaRow = (props) => {
       <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
+      <td>
+        <button onClick={() => onClick(item)}>Open</button>
+      </td>
     </tr>
   );
 };
@@ -28,6 +30,8 @@ MediaRow.propTypes = {
     description: PropTypes.string,
     created_at: PropTypes.string.isRequired,
   }).isRequired,
+
+  onClick: PropTypes.func.isRequired,
 };
 
 export default MediaRow;
