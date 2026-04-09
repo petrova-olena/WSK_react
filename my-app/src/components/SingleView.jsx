@@ -7,6 +7,7 @@ const SingleView = ({item, setSelectedItem}) => {
 
           <h3>{item.title}</h3>
           <p>{item.description}</p>
+          <p>Owner: {item.username}</p>
 
           {item.media_type.startsWith('image/') ? (
             <img src={item.filename} alt={item.title} />
