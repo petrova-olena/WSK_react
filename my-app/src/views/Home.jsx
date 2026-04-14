@@ -1,65 +1,28 @@
-import {useState, useEffect} from 'react';
-import {fetchData} from '../utils/fetchData';
+import {useState} from 'react';
 import MediaRow from '../components/MediaRow';
+import SingleView from '../components/SingleView';
+import {useMedia} from '../hooks/apiHooks';
 
 const Home = () => {
-  const [mediaArray, setMediaArray] = useState([]);
-
-  useEffect(() => {
-    const getMedia = async () => {
-      try {
-        const mediaUrl = import.meta.env.VITE_MEDIA_API + '/media';
-        const media = await fetchData(mediaUrl);
-
-        console.log('media from API:', media);
-
-        const authBase = import.meta.env.VITE_AUTH_API + '/users/';
-
-        const mediaWithUsers = await Promise.all(
-          media.map(async (item) => {
-            const user = await fetchData(authBase + item.user_id);
-            return {
-              ...item,
-              username: user.username,
-            };
-          }),
-        );
-
-        console.log('media with users:', mediaWithUsers);
-
-        setMediaArray(mediaWithUsers);
-      } catch (error) {
-        console.error('Error loading media:', error);
-      }
-    };
-
-    getMedia();
-  }, []);
-
-  console.log(mediaArray);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const {mediaArray} = useMedia();
 
   return (
     <>
-      <h2>My Media</h2>
+      <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
       <table>
-        <thead>
-          <tr>
-            <th>Thumbnail</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Created</th>
-            <th>Size</th>
-            <th>Type</th>
-            <th>Owner</th>
-          </tr>
-        </thead>
         <tbody>
-          {mediaArray.map((item) => (
-            <MediaRow key={item.media_id} item={item} />
+          {mediaArray.map((mediaItem) => (
+            <MediaRow
+              key={mediaItem.media_id}
+              item={mediaItem}
+              setSelectedItem={setSelectedItem}
+            />
           ))}
         </tbody>
       </table>
     </>
   );
 };
+
 export default Home;
