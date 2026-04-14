@@ -1,6 +1,7 @@
 ## Deployment
 
 This project is deployed to Metropolia's user server.
-You can open the live version in your browser using the link below:
+You can open the live version in your browser using the links below:
 
-[Open ](https://users.metropolia.fi/~olenape/wsk-hooks/) to view it in the browser
+- [Routing] (https://users.metropolia.fi/~olenape/wsk-routing/)
+- [Hooks ](https://users.metropolia.fi/~olenape/wsk-hooks/)
