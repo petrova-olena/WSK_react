@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {fetchData} from '../utils/fetchData';
 
 const useMedia = () => {
@@ -52,7 +52,25 @@ const useUser = () => {
     return await fetchData(import.meta.env.VITE_AUTH_API + '/users/', options);
   };
 
-  return {postUser};
+  const checkUser = async (username) => {
+    return await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/username/' + username,
+    );
+  };
+
+  const getUserByToken = useCallback(async (token) => {
+    const options = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
+    return await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/token',
+      options,
+    );
+  }, []);
+
+  return {postUser, checkUser, getUserByToken};
 };
 
 const postAuthentication = async () => {

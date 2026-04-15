@@ -15,8 +15,15 @@ const LoginForm = () => {
   );
 
   async function doLogin() {
-    const loginResult = await postLogin(inputs);
-    console.log(loginResult);
+    try {
+      const loginResult = await postLogin(inputs);
+      console.log(loginResult);
+
+      localStorage.setItem('token', loginResult.token);
+      <Navigate to="/" />;
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 
   console.log(inputs);
