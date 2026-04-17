@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import {fetchData} from '../utils/fetchData';
 
 const useMedia = () => {
@@ -39,4 +39,55 @@ const useMedia = () => {
   return {mediaArray};
 };
 
-export {useMedia};
+const useUser = () => {
+  const postUser = async (inputs) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+
+    return await fetchData(import.meta.env.VITE_AUTH_API + '/users/', options);
+  };
+
+  const checkUser = async (username) => {
+    return await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/username/' + username,
+    );
+  };
+
+  const getUserByToken = useCallback(async (token) => {
+    const options = {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    };
+    return await fetchData(
+      import.meta.env.VITE_AUTH_API + '/users/token',
+      options,
+    );
+  }, []);
+
+  return {postUser, checkUser, getUserByToken};
+};
+
+const postAuthentication = async () => {
+  const postLogin = async (inputs) => {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+    return await fetchData(
+      import.meta.env.VITE_AUTH_API + '/auth/login',
+      fetchOptions,
+    );
+  };
+  return {postLogin};
+};
+
+export {useMedia, useUser, postAuthentication};
