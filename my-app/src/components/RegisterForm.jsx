@@ -36,7 +36,7 @@ const RegisterForm = () => {
         handleError('username', 'Username not available');
       }
     } catch {
-      // saa olla tyhjä
+      // can be empty
     }
   };
 
