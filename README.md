@@ -7,3 +7,4 @@ You can open the live version in your browser using the links below:
 - Open [Hooks ](https://users.metropolia.fi/~olenape/wsk-hooks/) to view it in the browser
 - Open [Custom hooks](https://users.metropolia.fi/~olenape/wsk-custom-hooks/) to view it in the browser
 - Open [Forms](https://users.metropolia.fi/~olenape/wsk-forms/) to view it in the browser
+- Open [Context](https://users.metropolia.fi/~olenape/wsk-context/) to view it in the browser
