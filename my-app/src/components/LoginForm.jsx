@@ -1,11 +1,14 @@
 import {postAuthentication} from '../hooks/apiHooks';
 import useForm from '../hooks/formHooks';
+import {useNavigate} from 'react-router';
 
 const LoginForm = () => {
   const initValues = {
     username: '',
     password: '',
   };
+
+  const navigate = useNavigate();
 
   const {postLogin} = postAuthentication();
 
@@ -20,7 +23,7 @@ const LoginForm = () => {
       console.log(loginResult);
 
       localStorage.setItem('token', loginResult.token);
-      <Navigate to="/" />;
+      navigate('/');
     } catch (error) {
       console.error(error.message);
     }
@@ -29,10 +32,11 @@ const LoginForm = () => {
   console.log(inputs);
 
   return (
-    <>
-      <h1>Login</h1>
+    <article className="auth-card">
+      <p className="auth-kicker">Welcome back</p>
+      <h2 className="auth-title">Sign in</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="auth-field">
           <label htmlFor="loginuser">Username</label>
           <input
             name="username"
@@ -42,7 +46,7 @@ const LoginForm = () => {
             autoComplete="username"
           />
         </div>
-        <div>
+        <div className="auth-field">
           <label htmlFor="loginpassword">Password</label>
           <input
             name="password"
@@ -52,9 +56,11 @@ const LoginForm = () => {
             autoComplete="current-password"
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="auth-submit" type="submit">
+          Sign in
+        </button>
       </form>
-    </>
+    </article>
   );
 };
 

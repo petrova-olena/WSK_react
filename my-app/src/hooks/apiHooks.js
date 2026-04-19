@@ -73,7 +73,7 @@ const useUser = () => {
   return {postUser, checkUser, getUserByToken};
 };
 
-const postAuthentication = async () => {
+const postAuthentication = () => {
   const postLogin = async (inputs) => {
     const fetchOptions = {
       method: 'POST',

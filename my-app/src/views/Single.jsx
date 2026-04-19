@@ -5,25 +5,19 @@ const Single = () => {
   const navigate = useNavigate();
   const item = state.item;
 
+  if (!item) {
+    return null;
+  }
+
+  console.log('item', item);
+
   return (
-    <div style={{padding: '1rem'}}>
-      <button onClick={() => navigate(-1)}>Go back</button>
-
+    <div>
+      <button onClick={() => navigate(-1)}>Back</button>
       <h2>{item.title}</h2>
-      <p>{item.description}</p>
       <p>Owner: {item.username}</p>
-
-      {item.media_type.startsWith('image/') ? (
-        <img
-          src={item.filename}
-          alt={item.title}
-          style={{maxWidth: '100%', marginTop: '1rem'}}
-        />
-      ) : (
-        <video controls style={{maxWidth: '100%', marginTop: '1rem'}}>
-          <source src={item.filename} type={item.media_type} />
-        </video>
-      )}
+      <img src={item.filename} alt={item.title} />
+      <p>{item.description}</p>
     </div>
   );
 };

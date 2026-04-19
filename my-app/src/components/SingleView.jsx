@@ -1,24 +1,22 @@
-const SingleView = ({item, setSelectedItem}) => {
+const SingleView = (props) => {
+  const {item, setSelectedItem} = props;
+
+  if (!item) {
+    return null;
+  }
+
   return (
-    <dialog open={!!item} onClose={() => setSelectedItem(null)}>
-      {item && (
-        <div>
-          <button onClick={() => setSelectedItem(null)}>Close</button>
-
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <p>Owner: {item.username}</p>
-
-          {item.media_type.startsWith('image/') ? (
-            <img src={item.filename} alt={item.title} />
-          ) : (
-            <video controls>
-              <source src={item.filename} type={item.media_type} />
-            </video>
-          )}
-        </div>
-      )}
+    <dialog open>
+      <button
+        onClick={() => {
+          setSelectedItem(null);
+        }}
+      >
+        Sulje
+      </button>
+      <img src={item.thumbnail} />
     </dialog>
   );
 };
+
 export default SingleView;
