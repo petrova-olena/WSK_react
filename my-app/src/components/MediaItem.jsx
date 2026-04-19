@@ -6,7 +6,7 @@ const MediaItem = ({item, setSelectedItem}) => {
     <tr key={item.filename}>
       <td>
         <Link to="/single" state={{item}}>
-          Klikkaa auki
+          Open
         </Link>
         <img src={item.thumbnail} />
       </td>
