@@ -10,8 +10,6 @@ const useMedia = () => {
         const mediaUrl = import.meta.env.VITE_MEDIA_API + '/media';
         const media = await fetchData(mediaUrl);
 
-        console.log('media from API:', media);
-
         const authBase = import.meta.env.VITE_AUTH_API + '/users/';
 
         const mediaWithUsers = await Promise.all(
@@ -24,8 +22,6 @@ const useMedia = () => {
           }),
         );
 
-        console.log('media with users:', mediaWithUsers);
-
         setMediaArray(mediaWithUsers);
       } catch (error) {
         console.error('Error loading media:', error);
@@ -34,9 +30,26 @@ const useMedia = () => {
 
     getMedia();
   }, []);
-  console.log(mediaArray);
 
-  return {mediaArray};
+  const postMedia = async (file, inputs, token) => {
+    const data = {
+      ...inputs,
+      ...file,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    };
+
+    return await fetchData(import.meta.env.VITE_MEDIA_API + '/media', options);
+  };
+
+  return {mediaArray, postMedia};
 };
 
 const useUser = () => {
@@ -90,4 +103,26 @@ const postAuthentication = () => {
   return {postLogin};
 };
 
-export {useMedia, useUser, postAuthentication};
+const useFile = () => {
+  const postFile = async (file, token) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      fetchOptions,
+    );
+  };
+
+  return {postFile};
+};
+
+export {useMedia, useUser, postAuthentication, useFile};
