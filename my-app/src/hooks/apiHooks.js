@@ -105,7 +105,7 @@ const postAuthentication = () => {
 
 const useFile = () => {
   const postFile = async (file, token) => {
-    const formData = new formData();
+    const formData = new FormData();
     formData.append('file', file);
 
     const fetchOptions = {
@@ -113,12 +113,11 @@ const useFile = () => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-      mode: 'cors',
       body: formData,
     };
 
     return await fetchData(
-      import.meta.env.VITE_FILE_API + '/upload/',
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
       fetchOptions,
     );
   };
