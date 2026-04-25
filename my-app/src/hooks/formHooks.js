@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 const useForm = (callback, initState) => {
   const [inputs, setInputs] = useState(initState);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState(null);
 
   const handleSubmit = (event) => {
     if (event) {

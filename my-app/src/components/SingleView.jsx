@@ -12,7 +12,7 @@ const SingleView = (props) => {
           setSelectedItem(null);
         }}
       >
-        Sulje
+        Close
       </button>
       <img src={item.thumbnail} />
     </dialog>

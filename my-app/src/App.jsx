@@ -1,3 +1,5 @@
+import './App.css';
+
 import {Route, BrowserRouter, Routes} from 'react-router';
 
 import About from './views/About';
@@ -10,6 +12,7 @@ import Single from './views/Single';
 import Upload from './views/Upload';
 import Logout from './views/Logout';
 import {UserProvider} from './contexts/UserContext';
+import Modify from './views/Modify';
 
 const App = () => {
   return (
@@ -29,15 +32,9 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/upload"
-              element={
-                <ProtectedRoute>
-                  <Upload />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/upload" element={<Upload />} />
             <Route path="/single" element={<Single />} />
+            <Route path="/modify" element={<Modify />} />
           </Route>
         </Routes>
       </UserProvider>

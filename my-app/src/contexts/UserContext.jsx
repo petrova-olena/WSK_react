@@ -1,5 +1,5 @@
 import {createContext, useState} from 'react';
-import {postAuthentication, useUser} from '../hooks/apiHooks';
+import {useAuthentication, useUser} from '../hooks/apiHooks';
 
 import {useNavigate} from 'react-router';
 
@@ -7,20 +7,17 @@ const UserContext = createContext(null);
 
 const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
-  const {postLogin} = postAuthentication();
+  const {postLogin} = useAuthentication();
   const {getUserByToken} = useUser();
   const navigate = useNavigate();
+  // const location = useLocation();
 
-  // Login, logout and autologin functions are here instead of components
+  // login, logout and autologin functions are here instead of components
   const handleLogin = async (credentials) => {
-    try {
-      const loginResult = await postLogin(credentials);
-      localStorage.setItem('token', loginResult.token);
-      setUser(loginResult.user);
-      navigate('/');
-    } catch (e) {
-      console.log(e.message);
-    }
+    const loginResult = await postLogin(credentials);
+    localStorage.setItem('token', loginResult.token);
+    setUser(loginResult.user);
+    navigate('/');
   };
 
   const handleLogout = () => {
@@ -41,6 +38,7 @@ const UserProvider = ({children}) => {
       if (token) {
         const userResponse = await getUserByToken(token);
         setUser(userResponse.user);
+        //navigate(location.pathname);
       }
     } catch (e) {
       console.log(e.message);
