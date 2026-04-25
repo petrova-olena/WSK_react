@@ -6,6 +6,7 @@
  * @param {object} options - fetch options
  * @return {Promise<object>} - the fetched data as a JS object
  */
+
 const fetchData = async (url, options = {}) => {
   // console.log('fetching data from url: ', url);
   const response = await fetch(url, options);

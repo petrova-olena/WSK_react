@@ -1,6 +1,7 @@
-import {useState} from 'react';
 import {useFile, useMedia} from '../hooks/apiHooks';
+
 import {useNavigate} from 'react-router';
+import {useState} from 'react';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -19,25 +20,24 @@ const Upload = () => {
     try {
       const token = localStorage.getItem('token');
       const postResult = await postFile(file, token);
+      await postMedia(postResult.data, inputs, token);
 
-      postMedia(postResult.data, inputs, token);
       navigate('/');
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if (file && inputs.title.length) {
-      console.log('Uploading...');
       doUpload();
     }
   };
 
-  const handleInputChange = (evt) => {
-    setInputs({...inputs, [evt.target.name]: evt.target.value});
+  const handleInputChange = (event) => {
+    setInputs({...inputs, [event.target.name]: event.target.value});
   };
 
   return (
@@ -91,4 +91,5 @@ const Upload = () => {
     </>
   );
 };
+
 export default Upload;
