@@ -9,3 +9,4 @@ You can open the live version in your browser using the links below:
 - Open [Forms](https://users.metropolia.fi/~olenape/wsk-forms/) to view it in the browser
 - Open [Context](https://users.metropolia.fi/~olenape/wsk-context/) to view it in the browser
 - Open [Upload](https://users.metropolia.fi/~olenape/wsk-upload/) to view it in the browser
+- Open [Tailwind](https://users.metropolia.fi/~olenape/wsk-tailwind/) to view it in the browser
